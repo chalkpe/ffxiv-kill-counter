@@ -20,6 +20,13 @@ https://chalkpe.github.io/ffxiv-kill-counter/
 1. Check **Using BeforeLogLineRead** on left panel
 1. `Add URL` → set as above and select the new row → Click `Overlay`
 
+## Usage
+
+### Commands
+
+* `/e reset` - reset entire counter
+* `/e ban <name>` - remove current data of `<name>` and prevent further counting (e.g. `/e ban Sabotender Desertor`)
+
 ## License
 
 [MIT](LICENSE)
