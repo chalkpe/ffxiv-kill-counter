@@ -1,29 +1,25 @@
 # ffxiv-kill-counter
 
-## Project setup
-```
-yarn install
+## Installation
+
+```url
+https://chalkpe.github.io/ffxiv-kill-counter/
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### OverlayPlugin
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+1. Open ACT
+1. Plugins → OverlayPlugin.dll → `New`
+1. Add new **Log Parse** type overlay (name is your choice)
+1. Switch to the new overlay tab and set **URL** as above
 
-### Run your tests
-```
-yarn run test
-```
+### ACTWebSocket
 
-### Lints and fixes files
-```
-yarn run lint
-```
+1. Open ACT
+1. Plugins → ACTWebSocket
+1. Check **Using BeforeLogLineRead** on left panel
+1. `Add URL` → set as above and select the new row → Click `Overlay`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## License
+
+[MIT](LICENSE)
