@@ -1,6 +1,6 @@
 {
   "name": "ffxiv-kill-counter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "repository": "https://github.com/ChalkPE/ffxiv-kill-counter",
   "author": "ChalkPE",
@@ -12,6 +12,7 @@
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "OverlayPlugin": "https://github.com/ngld/OverlayPlugin",
     "core-js": "^3.3.2",
     "vue": "^2.6.10"
   },
