@@ -10,22 +10,8 @@ https://chalkpe.github.io/ffxiv-kill-counter/
 
 1. Open ACT
 1. Plugins → OverlayPlugin.dll → `New`
-1. Add new **Log Parse** type overlay (name is your choice)
+1. Add new **Mini Parse** type overlay (name is your choice)
 1. Switch to the new overlay tab and set **URL** as above
-
-### ACTWebSocket
-
-1. Open ACT
-1. Plugins → ACTWebSocket
-1. Check **Using BeforeLogLineRead** on left panel
-1. `Add URL` → set as above and select the new row → Click `Overlay`
-
-## Usage
-
-### Commands
-
-* `/e reset` - reset entire counter
-* `/e ban <name>` - remove current data of `<name>` and prevent further counting (e.g. `/e ban Sabotender Desertor`)
 
 ## License
 
