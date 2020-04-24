@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <span v-if="!me">플레이어 인식 불가!</span>
-
     <table>
       <caption highlighted>
+        <span v-if="!me">플레이어 인식 불가!</span>
         <span @click="counter = {}">리셋</span>
         <span @click="collapsed = !collapsed">{{ collapsed ? '펼치기' : '접기' }}</span>
       </caption>
