@@ -1,8 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" :empty="counts.length === 0">
     <table>
       <caption highlighted>
-        <span v-if="!me">플레이어 인식 불가!</span>
         <span @click="counter = {}">리셋</span>
         <span @click="collapsed = !collapsed">{{ collapsed ? '펼치기' : '접기' }}</span>
       </caption>
@@ -20,16 +19,23 @@
         </tr>
       </transition-group>
     </table>
+
+    <footer @click="openRepository">v{{ pkg.version }}</footer>
+    <div v-if="!me">플레이어 인식 불가!</div>
   </div>
 </template>
 
 <script>
+import pkg from '../package.json'
+
 export default {
   name: 'App',
   data: () => ({
     me: null,
     pets: [],
     counter: {},
+
+    pkg,
     highlighted: [],
     collapsed: false
   }),
@@ -100,13 +106,31 @@ export default {
       const index = this.highlighted.indexOf(name)
       if (index < 0) this.highlighted.push(name)
       else this.highlighted.splice(index, 1)
+    },
+
+    openRepository () {
+      window.open(this.pkg.repository, '_blank')
     }
   }
 }
 </script>
 
 <style lang="scss">
+[highlighted] {
+  text-shadow: 0 0 0.1rem #ffc72f, 0 0 0.1rem #ffc72f;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
   user-select: none;
   color: white;
   font-size: 14px;
@@ -115,12 +139,14 @@ export default {
   font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
   text-shadow: 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce;
 
-  [highlighted] {
-    text-shadow: 0 0 0.1rem #ffc72f, 0 0 0.1rem #ffc72f;
+  footer { display: none; }
+  &[empty] {
+    footer { display: inherit; }
+    border: 0.15rem solid #80808080;
   }
 
   table {
-    min-width: 6rem;
+    min-width: 8rem;
 
     .counter-move {
       transition: transform 1s;
