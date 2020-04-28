@@ -28,6 +28,7 @@ export default {
   name: 'App',
   data: () => ({
     me: null,
+    pets: [],
     counter: {},
     highlighted: [],
     collapsed: false
@@ -42,8 +43,7 @@ export default {
   computed: {
     counts () {
       const entries = Object.entries(this.counter)
-      entries.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      return entries
+      return entries.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     }
   },
 
@@ -57,13 +57,43 @@ export default {
     },
 
     onLogLine ({ line }) {
-      if (line[0] !== '25') return
+      switch (line[0]) {
+        case '00': return this.onGameLogLine(line)
+        case '03': return this.onAddCombatant(line)
+        case '04': return this.onRemoveCombatant(line)
+        case '25': return this.onNetworkDeath(line)
+      }
+    },
+
+    onGameLogLine (line) {
+      switch (line[2].toLowerCase()) {
+        case '0b3a':
+          const m = /^(.+?)[이가] (.+?)[을를] 쓰러뜨렸습니다\.$/.exec(line[4])
+          return m !== null && m[1] === this.me.name && this.count(m[2])
+      }
+    },
+
+    onAddCombatant (line) {
+      const owner = parseInt(line[6], 16)
+      if (owner === this.me.id) this.pets.push(parseInt(line[2], 16))
+    },
+
+    onRemoveCombatant (line) {
+      const index = this.pets.indexOf(parseInt(line[2], 16))
+      if (index > -1) this.pets.splice(index, 1)
+    },
+
+    onNetworkDeath (line) {
       const victim = { name: line[3], id: parseInt(line[2], 16) }
       const attacker = { name: line[5], id: parseInt(line[4], 16) }
 
-      if (attacker.id !== this.me.id) return
-      const count = this.counter[victim.name] || 0
-      this.$set(this.counter, victim.name, count + 1)
+      if (attacker.id === this.me.id) return // detected by game logline
+      if (this.pets.includes(attacker.id)) this.count(victim.name)
+    },
+
+    count (name) {
+      const value = this.counter[name] || 0
+      this.$set(this.counter, name, value + 1)
     },
 
     toggleHighlight (name) {
