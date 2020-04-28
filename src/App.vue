@@ -143,7 +143,11 @@ html, body {
   font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
   text-shadow: 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce, 0 0 0.1rem #0090ce;
 
-  footer { display: none; }
+  footer {
+    display: none;
+    letter-spacing: initial;
+  }
+
   &[empty] {
     footer { display: inherit; }
     border: 0.15rem solid #80808080;
