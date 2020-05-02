@@ -2,8 +2,17 @@
   <div id="app" :empty="counts.length === 0">
     <table>
       <caption highlighted>
-        <span @click="counter = {}">리셋</span>
-        <span @click="collapsed = !collapsed">{{ collapsed ? '펼치기' : '접기' }}</span>
+        <img
+          class="btn"
+          alt="리셋"
+          src="reset.png"
+          @click="counter = {}">
+
+        <img
+          class="btn"
+          :alt="collapsed ? '펼치기' : '접기'"
+          :src="`filter_${collapsed}.png`"
+          @click="collapsed = !collapsed">
       </caption>
 
       <transition-group name="counter" tag="tbody">
@@ -137,7 +146,7 @@ html, body {
 
   user-select: none;
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1rem;
   letter-spacing: -0.1rem;
   font-family: 'Noto Sans KR', '맑은 고딕', sans-serif;
@@ -183,14 +192,17 @@ html, body {
     }
 
     caption {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
 
-      span {
+      .btn {
         cursor: pointer;
+        &:active {
+          transform: translateY(0.08rem);
+        }
       }
 
-      span + span {
-        margin-left: 0.5rem;
+      .btn + .btn {
+        margin-left: 0.25rem;
       }
     }
   }
