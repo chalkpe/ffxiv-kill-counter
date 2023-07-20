@@ -38,6 +38,12 @@
 <script>
 import pkg from '../package.json'
 
+const logs = [
+  /^(You) defeat the (.+?)\.$/,
+  /^(.+?)は、(.+?)を倒した。$/,
+  /^(.+?)[이가] (.+?)[을를] 쓰러뜨렸습니다\.$/
+]
+
 export default {
   name: 'App',
   data: () => ({
@@ -84,8 +90,11 @@ export default {
     onGameLogLine (line) {
       switch (line[2].toLowerCase()) {
         case '0b3a':
-          const m = /^(.+?)[이가] (.+?)[을를] 쓰러뜨렸습니다\.$/.exec(line[4])
-          return m !== null && m[1] === this.me.name && this.count(m[2])
+          const me = [this.me.name, 'You']
+          for (const log of logs) {
+            const m = log.exec(line[4])
+            if (m !== null && me.includes(m[1])) return this.count(m[2])
+          }
       }
     },
 

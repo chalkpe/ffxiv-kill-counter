@@ -1,6 +1,6 @@
 # ffxiv-kill-counter
 
-Enemy kill counter for FINAL FANTASY XIV Korean server
+Enemy kill counter for FINAL FANTASY XIV
 
 ## Installation
 
