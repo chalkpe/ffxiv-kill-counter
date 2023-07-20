@@ -23,6 +23,7 @@
           :collapsed="collapsed"
           :highlighted="highlighted.includes(entry[0])"
           @click="toggleHighlight(entry[0])"
+          @contextmenu="remove(entry[0])"
         >
           <td>{{ entry[0] }}</td> <td>{{ entry[1] }}</td>
         </tr>
@@ -109,6 +110,10 @@ export default {
     count (name) {
       const value = this.counter[name] || 0
       this.$set(this.counter, name, value + 1)
+    },
+
+    remove (name) {
+      this.$delete(this.counter, name)
     },
 
     toggleHighlight (name) {
